@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Travis Song">
-<meta name="dcterms.date" content="2022-09-16">
+<meta name="dcterms.date" content="2022-11-10">
 
-<title>myblog - Welcome To My Blog</title>
+<title>myblog - Trying to understand the code</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -104,9 +104,10 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Welcome To My Blog</h1>
+      <h1 class="title">Trying to understand the code</h1>
                                 <div class="quarto-categories">
-                <div class="quarto-category">news</div>
+                <div class="quarto-category">code</div>
+                <div class="quarto-category">analysis</div>
               </div>
                   </div>
   </div>
@@ -124,7 +125,7 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">September 16, 2022</p>
+        <p class="date">November 10, 2022</p>
       </div>
     </div>
       
@@ -141,9 +142,15 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<p>This is the first post in a Quarto blog. Welcome!</p>
-<p><img src="thumbnail.jpg" class="img-fluid"></p>
-<p>Since this post doesn’t specify an explicit <code>image</code>, the first image in the post will be used in the listing page of posts.</p>
+<p>The code I am trying to understand is really difficult. I had to take about 3 weeks with Logan helping me to understand his code.</p>
+<p>Now that I understand it. I will explain it to you here.</p>
+<p>The code first download all of the farm field coordinates which is called chunk_id. The picture below will show you the chunk_ids</p>
+<p><img src="chunk_id.png" class="img-fluid"></p>
+<p>Then it reads in a dataset that has dates, latitude, longitude, and more that we got from stotz.</p>
+<p>Then we will also download the metadata about the HRRR grid</p>
+<p>We will then use the field lat, long, and nc_data to download the respective temperature of the date</p>
+<p>After getting all of the temperature we will filter it to the date range of that crop</p>
+<p>This is to the extent of my knowledge</p>
 
 
 

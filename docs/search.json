@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "myblog",
     "section": "",
-    "text": "news\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\n\n\nSep 19, 2022\n\n\nHarlow Malloc\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBreaking News\n\n\n\n\n\n\n\n\n\n\n\nSep 19, 2022\n\n\nTravis Song\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\n\n\nSep 16, 2022\n\n\nTristan O’Malley\n\n\n\n\n\n\nNo matching items"
+    "text": "code\n\n\nanalysis\n\n\n\n\n\n\n\n\n\n\n\nNov 10, 2022\n\n\nTravis Song\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBreaking News\n\n\n\n\n\n\n\n\n\n\n\nSep 19, 2022\n\n\nTravis Song\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\n\n\nSep 16, 2022\n\n\nTravis Song\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "about.html",
@@ -16,9 +16,9 @@
   {
     "objectID": "posts/post-with-code/index.html",
     "href": "posts/post-with-code/index.html",
-    "title": "Post With Code",
+    "title": "Trying to understand the code",
     "section": "",
-    "text": "This is a post with executable code."
+    "text": "Now that I understand it. I will explain it to you here.\nThe code first download all of the farm field coordinates which is called chunk_id. The picture below will show you the chunk_ids\n\nThen it reads in a dataset that has dates, latitude, longitude, and more that we got from stotz.\nThen we will also download the metadata about the HRRR grid\nWe will then use the field lat, long, and nc_data to download the respective temperature of the date\nAfter getting all of the temperature we will filter it to the date range of that crop\nThen we will convert a list in one data point to many columns"
   },
   {
     "objectID": "posts/testpost.html",
@@ -33,5 +33,12 @@
     "title": "Welcome To My Blog",
     "section": "",
     "text": "Since this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts."
+  },
+  {
+    "objectID": "posts/Understand_code/index.html",
+    "href": "posts/Understand_code/index.html",
+    "title": "Trying to understand the code",
+    "section": "",
+    "text": "Now that I understand it. I will explain it to you here.\nThe code first download all of the farm field coordinates which is called chunk_id. The picture below will show you the chunk_ids\n\nThen it reads in a dataset that has dates, latitude, longitude, and more that we got from stotz.\nThen we will also download the metadata about the HRRR grid\nWe will then use the field lat, long, and nc_data to download the respective temperature of the date\nAfter getting all of the temperature we will filter it to the date range of that crop\nThis is to the extent of my knowledge"
   }
 ]

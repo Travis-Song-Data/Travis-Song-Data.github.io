@@ -1,0 +1,27 @@
+---
+title: "Trying to understand the code"
+author: "Travis Song"
+date: "11/10/2022"
+categories: [code, analysis]
+image: "image.jpg"
+---
+
+The code I am trying to understand is really difficult. I had to take about 3 weeks with Logan helping me to understand his code.
+
+Now that I understand it. I will explain it to you here.
+
+The code first download all of the farm field coordinates which is called chunk_id. The picture below will show you the chunk_ids
+
+![](chunk_id.png)
+
+Then it reads in a dataset that has dates, latitude, longitude, and more that we got from stotz. 
+
+Then we will also download the metadata about the HRRR grid
+
+We will then use the field lat, long, and nc_data to download the respective temperature of the date
+
+After getting all of the temperature we will filter it to the date range of that crop
+
+This is to the extent of my knowledge 
+
+
