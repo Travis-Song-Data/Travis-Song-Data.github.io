@@ -3,7 +3,7 @@ title: "Trying to understand the code"
 author: "Travis Song"
 date: "10/10/2022"
 categories: [code, analysis]
-image: "image.jpg"
+image: "code.jpg"
 ---
 
 The code I am trying to understand is really difficult. I had to take about 3 weeks with Logan helping me to understand his code.
