@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Travis Song">
-<meta name="dcterms.date" content="2022-10-28">
+<meta name="dcterms.date" content="2022-11-29">
 
-<title>myblog - I created a function!</title>
+<title>myblog - Fun features I learned</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -167,9 +167,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">I created a function!</h1>
+      <h1 class="title">Fun features I learned</h1>
                                 <div class="quarto-categories">
-                <div class="quarto-category">Functions</div>
+                <div class="quarto-category">Features</div>
               </div>
                   </div>
   </div>
@@ -187,7 +187,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">October 28, 2022</p>
+        <p class="date">November 29, 2022</p>
       </div>
     </div>
       
@@ -204,25 +204,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 
-<p>I created a function to convert a column of list to a whole row of columns. The only problem with this is that every list is almost a different size. Which would create problems. What I was use rbind.fill to append the rows on top of each other and fill the empty columns with NAs.</p>
+<p>Some of the awesome things I learned<br>
+<br>
+1. source()</p>
+<p>These are just a few examples that I use source to make the main code block look a little nicer</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>source(<span class="st">"library.R"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>source(<span class="st">"connect_to_snowflake.R"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>source(<span class="st">"functions.R"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><br>
+2. browser()</p>
+<p>You can paste this piece of code in your function and it will pause it from running. It will also allow you to look at the variables that your function created. This piece of code has saved me more times than I can count.</p>
 <p>The code is show below</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>convert_dataframe_col <span class="op">&lt;-</span> function(data_to_concat, data){</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># This is to create the number of times I had to run the for loop below</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="bu">range</span> <span class="op">&lt;-</span> <span class="dv">1</span>:nrow(data)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># This is to create a new dataFrame to append the rows to</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  new_ft <span class="op">&lt;-</span> data.frame()</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># This for loop converts the list into columns (which sometimes it gives two, then I select the first one) and then transpose it to a row which I then rbind it to the dataFrame I created above</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (val <span class="kw">in</span> <span class="bu">range</span>){</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    temp_frame <span class="op">&lt;-</span> head(data.frame(t(do.call(data.frame, data_to_concat[val]))), <span class="dv">1</span>)</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    new_ft <span class="op">&lt;-</span> rbind.fill(new_ft, temp_frame)</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># This is to bind the newly created dataset to the original dataset</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  new_ft <span class="op">&lt;-</span> cbind(data, new_ft)</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span>(new_ft)</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>convert_dataframe_col <span class="op">&lt;-</span> function(data_to_concat, data){</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="bu">range</span> <span class="op">&lt;-</span> <span class="dv">1</span>:nrow(data)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  new_ft <span class="op">&lt;-</span> data.frame()</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># if you put browser here. You will be able to see the empty dataframe that you created and the number of rows your data has in the variable range</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  browser()</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (val <span class="kw">in</span> <span class="bu">range</span>){</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    temp_frame <span class="op">&lt;-</span> head(data.frame(t(do.call(data.frame, data_to_concat[val]))), <span class="dv">1</span>)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    new_ft <span class="op">&lt;-</span> rbind.fill(new_ft, temp_frame)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  new_ft <span class="op">&lt;-</span> cbind(data, new_ft)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span>(new_ft)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><br>
+3. Purrr and Furrrr</p>
+<p>In the process of coding I found out how useful Purrr and Furrr are. Purrr is used in such a manor that it allowed me to pass in one row at a time to a function that had difficulty processing an entire dataset at once.</p>
+<p>Bro Hathaway and I were discussing on how to make the program run faster and Furrr allows you to use more of your CPU at once, running the code in paralle. But we did not use it in the end.</p>
+<p>The code below was one of the times that purrr was indispensable. The function get_temp_from_date_range_cdat could only take in one row at a time.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>temp_list <span class="op">&lt;-</span> purrr:::pmap(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  dplyr::select(</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    fields_chunk_info, seeding_date, harvest_date, chunk_id, in_chunk_x, in_chunk_y),</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="op">~</span>get_temp_from_date_range_cdat(cdat, .<span class="fl">.1</span>, .<span class="fl">.2</span>, .<span class="fl">.3</span>, .<span class="fl">.4</span>, .<span class="fl">.5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
 

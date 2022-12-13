@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Travis Stotz Blog",
     "section": "",
-    "text": "code\n\n\nanalysis\n\n\n\n\n\n\n\n\n\n\n\nOct 10, 2022\n\n\nTravis Song\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBreaking News\n\n\n\n\n\n\n\n\n\n\n\nSep 19, 2022\n\n\nTravis Song\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\n\n\nSep 16, 2022\n\n\nTravis Song\n\n\n\n\n\n\nNo matching items"
+    "text": "Features\n\n\n\n\n\n\n\n\n\n\n\nNov 29, 2022\n\n\nTravis Song\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\nFunctions\n\n\n\n\n\n\n\n\n\n\n\nOct 28, 2022\n\n\nTravis Song\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\n\n\nOct 10, 2022\n\n\nTravis Song\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "about.html",
@@ -30,9 +30,9 @@
   {
     "objectID": "posts/welcome/index.html",
     "href": "posts/welcome/index.html",
-    "title": "Welcome To My Blog",
+    "title": "I created a function!",
     "section": "",
-    "text": "Since this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts."
+    "text": "The code is show below\nconvert_dataframe_col <- function(data_to_concat, data){\n  # This is to create the number of times I had to run the for loop below\n  range <- 1:nrow(data)\n  \n  # This is to create a new dataFrame to append the rows to\n  new_ft <- data.frame()\n  \n  # This for loop converts the list into columns (which sometimes it gives two, then I select the first one) and then transpose it to a row which I then rbind it to the dataFrame I created above\n  for (val in range){\n    temp_frame <- head(data.frame(t(do.call(data.frame, data_to_concat[val]))), 1)\n    new_ft <- rbind.fill(new_ft, temp_frame)\n  }\n  \n  # This is to bind the newly created dataset to the original dataset\n  new_ft <- cbind(data, new_ft)\n  return(new_ft)\n}"
   },
   {
     "objectID": "posts/Understand_code/index.html",
@@ -40,5 +40,12 @@
     "title": "Trying to understand the code",
     "section": "",
     "text": "Now that I understand it. I will explain it to you here.\nThe code first download all of the farm field coordinates which is called chunk_id. The picture below will show you the chunk_ids\n\nThen it reads in a dataset that has dates, latitude, longitude, and more that we got from stotz.\nThen we will also download the metadata about the HRRR grid\nWe will then use the field lat, long, and nc_data to download the respective temperature of the date\nAfter getting all of the temperature we will filter it to the date range of that crop\nThis is to the extent of my knowledge"
+  },
+  {
+    "objectID": "posts/I_learn/index.html",
+    "href": "posts/I_learn/index.html",
+    "title": "Fun features I learned",
+    "section": "",
+    "text": "These are just a few examples that I use source to make the main code block look a little nicer\nsource(\"library.R\")\n\nsource(\"connect_to_snowflake.R\")\n\nsource(\"functions.R\")\n\n2. browser()\nYou can paste this piece of code in your function and it will pause it from running. It will also allow you to look at the variables that your function created. This piece of code has saved me more times than I can count.\nThe code is show below\nconvert_dataframe_col <- function(data_to_concat, data){\n  range <- 1:nrow(data)\n  \n  new_ft <- data.frame()\n  \n  # if you put browser here. You will be able to see the empty dataframe that you created and the number of rows your data has in the variable range\n  browser()\n\n  for (val in range){\n    temp_frame <- head(data.frame(t(do.call(data.frame, data_to_concat[val]))), 1)\n    new_ft <- rbind.fill(new_ft, temp_frame)\n  }\n  \n  new_ft <- cbind(data, new_ft)\n  return(new_ft)\n}\n\n3. Purrr and Furrrr\nIn the process of coding I found out how useful Purrr and Furrr are. Purrr is used in such a manor that it allowed me to pass in one row at a time to a function that had difficulty processing an entire dataset at once.\nBro Hathaway and I were discussing on how to make the program run faster and Furrr allows you to use more of your CPU at once, running the code in paralle. But we did not use it in the end.\nThe code below was one of the times that purrr was indispensable. The function get_temp_from_date_range_cdat could only take in one row at a time.\ntemp_list <- purrr:::pmap(\n  dplyr::select(\n    fields_chunk_info, seeding_date, harvest_date, chunk_id, in_chunk_x, in_chunk_y),\n  ~get_temp_from_date_range_cdat(cdat, ..1, ..2, ..3, ..4, ..5))"
   }
 ]

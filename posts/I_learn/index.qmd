@@ -1,0 +1,65 @@
+---
+title: "Fun features I learned"
+author: "Travis Song"
+date: "11/29/2022"
+categories: [Features]
+image: ""
+---
+
+Some of the awesome things I learned \
+\
+1. source()
+
+These are just a few examples that I use source to make the main code block look a little nicer
+```python
+source("library.R")
+
+source("connect_to_snowflake.R")
+
+source("functions.R")
+
+```
+\
+2. browser()
+
+You can paste this piece of code in your function and it will pause it from running.
+It will also allow you to look at the variables that your function created.
+This piece of code has saved me more times than I can count.
+
+The code is show below 
+
+```python
+convert_dataframe_col <- function(data_to_concat, data){
+  range <- 1:nrow(data)
+  
+  new_ft <- data.frame()
+  
+  # if you put browser here. You will be able to see the empty dataframe that you created and the number of rows your data has in the variable range
+  browser()
+
+  for (val in range){
+    temp_frame <- head(data.frame(t(do.call(data.frame, data_to_concat[val]))), 1)
+    new_ft <- rbind.fill(new_ft, temp_frame)
+  }
+  
+  new_ft <- cbind(data, new_ft)
+  return(new_ft)
+}
+
+```
+\
+3. Purrr and Furrrr
+
+In the process of coding I found out how useful Purrr and Furrr are.
+Purrr is used in such a manor that it allowed me to pass in one row at a time to a function that had difficulty processing an entire dataset at once.
+
+Bro Hathaway and I were discussing on how to make the program run faster and Furrr allows you to use more of your CPU at once, running the code in paralle. But we did not use it in the end.
+
+The code below was one of the times that purrr was indispensable. The function get_temp_from_date_range_cdat could only take in one row at a time.
+```python
+temp_list <- purrr:::pmap(
+  dplyr::select(
+    fields_chunk_info, seeding_date, harvest_date, chunk_id, in_chunk_x, in_chunk_y),
+  ~get_temp_from_date_range_cdat(cdat, ..1, ..2, ..3, ..4, ..5))
+
+```
